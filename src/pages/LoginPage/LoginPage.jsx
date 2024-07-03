@@ -1,12 +1,17 @@
 import { Formik, Form, Field } from "formik";
 import { useId } from "react";
 
-export default function LoginPage(submit) {
+import { useDispatch } from "react-redux";
+import { logging } from "../../redux/auth/operations";
+
+export default function LoginPage() {
   const emailId = useId();
   const passwordId = useId();
 
+  const dispatch = useDispatch();
+
   function doSubmit(values, action) {
-    submit(values);
+    dispatch(logging(values));
     action.resetForm();
   }
 

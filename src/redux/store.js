@@ -1,7 +1,15 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { contactsReducer } from "./contacts/slice";
 import { filtersReducer } from "./filters/slice";
 import { authReducer } from "./auth/slice";
+
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+
+const persistConfig = {
+  key: "root",
+  storage,
+};
 
 const rootReducer = combineReducers({
   contacts: contactsReducer,
@@ -9,4 +17,10 @@ const rootReducer = combineReducers({
   auth: authReducer,
 });
 
-export const store = configureStore({ reducer: rootReducer });
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export const store = configureStore({
+  reducer: persistedReducer,
+});
+
+export const persistor = persistStore(store);

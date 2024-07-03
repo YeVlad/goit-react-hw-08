@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { registration } from "./operations";
+import { logging, logout, refreshUser, registration } from "./operations";
+import { useSelector } from "react-redux";
+import { selectToken } from "./selectors";
 registration;
 
 const authInitialState = {
@@ -18,44 +20,40 @@ const authSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-
       .addCase(registration.fulfilled, (state, action) => {
-        state.token = action.token;
-        state.user = action.user;
+        state.token = action.payload.token;
+        state.user = action.payload.user;
         state.isLoggedIn = true;
-        console.log(action);
       })
       .addCase(registration.rejected, (state, action) => {
         state.error = action.payload;
+      })
+      .addCase(logging.fulfilled, (state, action) => {
+        state.token = action.payload.token;
+        state.user = action.payload.user;
+        state.isLoggedIn = true;
+      })
+      .addCase(logging.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.token = null;
+        state.user = {
+          name: null,
+          email: null,
+        };
+        state.isLoggedIn = false;
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(refreshUser.fulfilled, () => {
+        console.log("All is ok");
+      })
+      .addCase(refreshUser.rejected, (state) => {
+        state.token = null;
+        state.isLoggedIn = false;
       });
-    //       // POST
-    //       .addCase(addContacts.pending, (state) => {
-    //         state.error = null;
-    //         state.loading = true;
-    //       })
-    //       .addCase(addContacts.fulfilled, (state, action) => {
-    //         state.loading = false;
-    //         state.items.push(action.payload);
-    //       })
-    //       .addCase(addContacts.rejected, (state, action) => {
-    //         state.loading = false;
-    //         state.error = action.payload;
-    //       })
-    //       // DELETE
-    //       .addCase(deleteContacts.pending, (state) => {
-    //         state.error = null;
-    //         state.loading = true;
-    //       })
-    //       .addCase(deleteContacts.fulfilled, (state, action) => {
-    //         state.loading = false;
-    //         state.items = state.items.filter(
-    //           (item) => item.id != action.payload.id
-    //         );
-    //       })
-    //       .addCase(deleteContacts.rejected, (state, action) => {
-    //         state.loading = false;
-    //         state.error = action.payload;
-    //       });
   },
 });
 
