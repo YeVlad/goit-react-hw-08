@@ -1,0 +1,24 @@
+.appbar-items {
+  display: flex;
+  justify-content: space-between;
+}
+
+.partForLogged {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.partForUnLogged {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.formLoginReg {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
