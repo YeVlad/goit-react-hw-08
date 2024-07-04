@@ -1,4 +1,4 @@
-export function isLogged(state) {
+export function selectIsLoggedIn(state) {
   return state.auth.isLoggedIn;
 }
 
@@ -10,10 +10,10 @@ export function selectAuth(state) {
   return state.auth;
 }
 
-export function getState(state) {
-  return state;
+export function selectUserName(state) {
+  return state.auth.user.name;
 }
 
-export function getName(state) {
-  return state.auth.user.name;
+export function selectIsRefreshing(state) {
+  return state.auth.isRefreshing;
 }

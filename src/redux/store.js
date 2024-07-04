@@ -20,20 +20,21 @@ import {
 const persistConfig = {
   key: "root",
   storage,
+  whitelist: ["token"],
 };
+
+const persistedAuthReducer = persistReducer(persistConfig, authReducer);
 
 const rootReducer = combineReducers({
   contacts: contactsReducer,
   filters: filtersReducer,
-  auth: authReducer,
+  auth: persistedAuthReducer,
 });
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 axios.defaults.baseURL = "https://connections-api.goit.global";
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

@@ -1,19 +1,17 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { getName, isLogged } from "../../redux/auth/selectors";
+import { selectUserName, selectIsLoggedIn } from "../../redux/auth/selectors";
 import { logout } from "../../redux/auth/operations";
-import { cleanCollection } from "../../redux/contacts/slice";
 
 export default function AppBar() {
   const dispatch = useDispatch();
   function loggingOut() {
     dispatch(logout());
-    dispatch(cleanCollection());
   }
 
-  const logged = useSelector(isLogged);
+  const logged = useSelector(selectIsLoggedIn);
 
-  const userName = useSelector(getName);
+  const userName = useSelector(selectUserName);
 
   return (
     <div className="appbar-items">
