@@ -2,7 +2,7 @@ import { Formik, Form, Field } from "formik";
 import { useId } from "react";
 
 import { useDispatch } from "react-redux";
-import { logging } from "../../redux/auth/operations";
+import { login } from "../../redux/auth/operations";
 
 export default function LoginPage() {
   const emailId = useId();
@@ -11,14 +11,14 @@ export default function LoginPage() {
   const dispatch = useDispatch();
 
   function doSubmit(values, action) {
-    dispatch(logging(values));
+    dispatch(login(values));
     action.resetForm();
   }
 
   return (
     <Formik initialValues={{ email: "", password: "" }} onSubmit={doSubmit}>
       <Form className="formLoginReg">
-        <h2>Logining form</h2>
+        <h2>Login form</h2>
         <label htmlFor={emailId}>E-mail</label>
         <Field id={emailId} name="email"></Field>
         <label htmlFor={passwordId}>Password</label>

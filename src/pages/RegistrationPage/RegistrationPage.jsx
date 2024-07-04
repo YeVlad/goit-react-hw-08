@@ -2,9 +2,9 @@ import { Formik, Form, Field } from "formik";
 import { useId } from "react";
 
 import { useDispatch } from "react-redux";
-import { registration } from "../../redux/auth/operations";
+import { register } from "../../redux/auth/operations";
 
-export default function RegisterPage() {
+export default function RegistrationPage() {
   const nameId = useId();
   const emailId = useId();
   const passwordId = useId();
@@ -12,7 +12,7 @@ export default function RegisterPage() {
   const dispatch = useDispatch();
 
   function doSubmit(values, action) {
-    dispatch(registration(values));
+    dispatch(register(values));
     action.resetForm();
   }
 

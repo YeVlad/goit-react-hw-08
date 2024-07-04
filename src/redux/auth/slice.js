@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { logging, logout, refreshUser, registration } from "./operations";
+import { login, logout, refreshUser, register } from "./operations";
 import { useSelector } from "react-redux";
 import { selectToken } from "./selectors";
-registration;
 
 const authInitialState = {
   user: {
@@ -20,20 +19,20 @@ const authSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(registration.fulfilled, (state, action) => {
+      .addCase(register.fulfilled, (state, action) => {
         state.token = action.payload.token;
         state.user = action.payload.user;
         state.isLoggedIn = true;
       })
-      .addCase(registration.rejected, (state, action) => {
+      .addCase(register.rejected, (state, action) => {
         state.error = action.payload;
       })
-      .addCase(logging.fulfilled, (state, action) => {
+      .addCase(login.fulfilled, (state, action) => {
         state.token = action.payload.token;
         state.user = action.payload.user;
         state.isLoggedIn = true;
       })
-      .addCase(logging.rejected, (state, action) => {
+      .addCase(login.rejected, (state, action) => {
         state.error = action.payload;
       })
       .addCase(logout.fulfilled, (state) => {

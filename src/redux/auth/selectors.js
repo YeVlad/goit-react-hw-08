@@ -13,3 +13,7 @@ export function selectAuth(state) {
 export function getState(state) {
   return state;
 }
+
+export function getName(state) {
+  return state.auth.user.name;
+}

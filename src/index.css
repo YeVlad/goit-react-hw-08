@@ -22,3 +22,15 @@
   flex-direction: column;
   width: 200px;
 }
+
+.private-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+}
+
+ul {
+  padding: 0;
+}
