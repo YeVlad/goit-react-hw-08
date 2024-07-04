@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch,  } from "react-redux";
 
 import HomePage from "../../pages/HomePage/HomePage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
@@ -10,7 +10,6 @@ import NotFound from "../../pages/NotFound/NotFound";
 import AppBar from "../AppBar/AppBar";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import PublicRoute from "../PublicRoute/PublicRoute";
-import { getState, selectAuth } from "../../redux/auth/selectors";
 import { refreshUser } from "../../redux/auth/operations";
 import ContactsPage from "../../pages/ContactsPage/ContactsPage";
 
