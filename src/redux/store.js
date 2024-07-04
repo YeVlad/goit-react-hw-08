@@ -3,6 +3,8 @@ import { contactsReducer } from "./contacts/slice";
 import { filtersReducer } from "./filters/slice";
 import { authReducer } from "./auth/slice";
 
+import axios from "axios";
+
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 
@@ -27,6 +29,8 @@ const rootReducer = combineReducers({
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+axios.defaults.baseURL = "https://connections-api.goit.global";
 
 export const store = configureStore({
   reducer: persistedReducer,
