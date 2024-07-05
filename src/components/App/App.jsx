@@ -7,13 +7,13 @@ import HomePage from "../../pages/HomePage/HomePage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
 import RegistrationPage from "../../pages/RegistrationPage/RegistrationPage";
 import NotFound from "../../pages/NotFound/NotFound";
-import AppBar from "../AppBar/AppBar";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import RestrictedRoute from "../RestrictedRoute/RestrictedRoute";
 import { refreshUser } from "../../redux/auth/operations";
 import ContactsPage from "../../pages/ContactsPage/ContactsPage";
 import { useEffect } from "react";
 import { selectIsRefreshing } from "../../redux/auth/selectors";
+import Layout from "../Layout/Layout";
 
 function App() {
   const refreshing = useSelector(selectIsRefreshing);
@@ -24,17 +24,18 @@ function App() {
   return (
     !refreshing && (
       <>
-        <AppBar />
         <Routes>
-          <Route element={<PrivateRoute />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/contacts" element={<ContactsPage />} />
+          <Route element={<Layout />}>
+            <Route element={<PrivateRoute />}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/contacts" element={<ContactsPage />} />
+            </Route>
+            <Route element={<RestrictedRoute />}>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegistrationPage />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
           </Route>
-          <Route element={<RestrictedRoute />}>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegistrationPage />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
         </Routes>
       </>
     )
