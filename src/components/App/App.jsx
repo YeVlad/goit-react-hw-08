@@ -21,24 +21,23 @@ function App() {
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
-  return (
-    !refreshing && (
-      <>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route element={<PrivateRoute />}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/contacts" element={<ContactsPage />} />
-            </Route>
-            <Route element={<RestrictedRoute />}>
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegistrationPage />} />
-            </Route>
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </>
-    )
+  return refreshing ? (
+    <div>Refreshing...</div>
+  ) : (
+    <>
+      <Layout />
+      <Routes>
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/contacts" element={<ContactsPage />} />
+        </Route>
+        <Route element={<RestrictedRoute />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegistrationPage />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 }
 
